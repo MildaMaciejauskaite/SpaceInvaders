@@ -20,9 +20,20 @@ public class GameRules {
 		System.exit(0);
 	}
 	
-	public void moveInvader() {
-		int nextX = invader.invaderX + invader.invaderDx;
-		int nextY = invader.invaderY + invader.invaderDy;
+	void Move(int dx, int dy) {
+            if(dy==0){
+                int nextX = protector.protectorX + dx;
+		int nextY = protector.protectorY + dy;
+		
+		if (map.isWall(nextX, nextY))
+			return;
+		
+		protector.setProtectorX(nextX);
+		protector.setProtectorY(nextY);
+            }
+            else {
+                int nextX = invader.invaderX + dx;
+		int nextY = invader.invaderY + dy;
 		
 		if (map.isWall(nextX, nextY)) {
 			invader.invaderDx *= -1;
@@ -31,12 +42,14 @@ public class GameRules {
 		}else {
 			invader.invaderDx = nextX;
 			invader.invaderDy = nextY;
-		}				
+		}
+            }
 	}
+        
  	public void processCommand(Command command) throws Exception{
 		switch(command) {
 		case LEFT:
-			tryMoveProtector(-1, 0);
+			Move(-1, 0);
 			break;
 		case NOTHING:
 			break;
@@ -44,7 +57,7 @@ public class GameRules {
 			endGame();
 			break;
 		case RIGHT:
-			tryMoveProtector(1, 0);
+			Move(1, 0);
 			break;
                 case UP:
 			ShootOut(0, -1);
@@ -53,17 +66,7 @@ public class GameRules {
 			break;
 		}
 	}
- 	private void tryMoveProtector(int dx, int dy) {
-		int nextX = protector.protectorX + dx;
-		int nextY = protector.protectorY + dy;
-		
-		if (map.isWall(nextX, nextY))
-			return;
-		
-		protector.setProtectorX(nextX);
-		protector.setProtectorY(nextY);
-	}
-        
+ 	
         private void ShootOut(int dx, int dy) {
                 for (int z= protector.protectorY + dy; z > 1; z--){
                     int nextX = protector.protectorX + dx;
