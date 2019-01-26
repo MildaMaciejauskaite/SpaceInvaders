@@ -1,0 +1,43 @@
+package spaceinvaders;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class UserInputTest {
+
+    @Test
+    public void getCommand_validInput_returnsCommand() {
+        UserInput userInput = new UserInput(); 
+        char input = 'a';
+        Command actual = userInput.getCommand(input); 
+        assertEquals(Command.LEFT, actual);
+    }
+    
+    @Test
+    public void getCommand_validInput_returnsCommand1() {
+        UserInput userInput = new UserInput(); 
+        char input = 'w';
+        Command actual = userInput.getCommand(input);
+        assertEquals(Command.UP, actual);
+    }
+    
+    @Test
+    public void getCommand_validInput_returnsCommand2() {
+        UserInput userInput = new UserInput();
+        char input = 'q';
+        Command actual = userInput.getCommand(input);
+        assertEquals(Command.QUIT, actual);
+    }
+
+    @Test
+    public void getCommand_validInput_returnsCommand3() {
+        UserInput userInput = new UserInput(); 
+        char input = 'd';
+        Command actual = userInput.getCommand(input);
+        assertEquals(Command.RIGHT, actual);
+    }   
+}
