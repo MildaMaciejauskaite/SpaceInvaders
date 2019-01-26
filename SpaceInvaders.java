@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class SpaceInvaders {
     public static void main(String[] args) throws IOException, Exception {
-		Map map = new Map();
+                Map map = new Map();
 		Invader invader = new Invader(9,3,-1,0);
 		Protector protector = new Protector(9, 10);
                 Shot shot = new Shot(9, 10);
@@ -13,6 +13,7 @@ public class SpaceInvaders {
 		GameRules gameRules = new GameRules(protector, invader, map, shot);
 		UserInput userInput = new UserInput();
 		
+                
 		while(true) {
 			renderer.render();
 			if (gameRules.isGameOver())
@@ -20,7 +21,7 @@ public class SpaceInvaders {
 			
 			Command command = userInput.getCommand();
 			gameRules.processCommand(command);
-			gameRules.moveInvader();
+			gameRules.Move(invader.invaderDx, invader.invaderDy);
 		}
 	}
 }
